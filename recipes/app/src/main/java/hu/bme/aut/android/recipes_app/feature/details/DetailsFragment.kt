@@ -44,7 +44,7 @@ class DetailsFragment : Fragment() {
         }
         binding.tvIngredients.text = details?.ingredients?.joinToString(separator = "; ")
         binding.tvInstructions.text = details?.instructions?.joinToString(separator = "\n - ", prefix = "- ")
-        binding.tvTags.text = details?.tags?.joinToString(separator = ", ")
+        binding.tvTags.text = details?.tags?.joinToString(separator = ", ", prefix = "'", postfix= "'")
         Glide.with(this)
             .load(details?.image)
             .transition(DrawableTransitionOptions().crossFade())
