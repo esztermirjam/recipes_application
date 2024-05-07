@@ -11,6 +11,7 @@
         android:id="@+id/tvName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="15sp"
         tools:text="Recipe name"/>
 
     <TextView
@@ -18,13 +19,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        tools:text="Ingredients"/>
+        android:layout_marginStart="10dp"
+        android:background="#FF8CE490"
+        android:textStyle="italic"
+        tools:text="Ingredients: "/>
 
     <TextView
         android:id="@+id/tvInstructions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="10dp"
+        android:background="#FF85D3CA"
         tools:text="Instructions"/>
 
     <TextView
@@ -32,12 +38,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:textStyle="italic"
         tools:text="Tags"/>
 
     <ImageView
         android:id="@+id/ivIcon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="10dp"/>
 
 </LinearLayout>
