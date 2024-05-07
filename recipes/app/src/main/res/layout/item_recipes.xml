@@ -8,17 +8,46 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/tvName"
+        android:id="@+id/tvN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/recipe_name"/>
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:background="#FF6585D8"
+        android:textSize="30dp"
         tools:text="Recipe name"/>
+
+    <TextView
+        android:id="@+id/tvI"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/ingredients"/>
 
     <TextView
         android:id="@+id/tvIngredients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:padding="20dp"
+        android:background="#FFB66AD1"
+        android:textStyle="italic"
         tools:text="Ingredients"/>
+
+    <TextView
+        android:id="@+id/tvIm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/image"/>
 
     <ImageView
         android:id="@+id/ivIcon"

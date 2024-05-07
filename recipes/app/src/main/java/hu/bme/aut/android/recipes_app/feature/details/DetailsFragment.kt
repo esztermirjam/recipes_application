@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import hu.bme.aut.android.recipes_app.databinding.FragmentDetailsBinding
-import hu.bme.aut.android.recipes_app.feature.recipes.RecipesDataHolder
 import java.io.File.separator
 
 class DetailsFragment : Fragment() {
@@ -43,9 +42,9 @@ class DetailsFragment : Fragment() {
         if (details != null) {
             binding.tvName.text = details.name
         }
-        binding.tvIngredients.text = details?.ingredients?.joinToString(separator = "\n")
-        binding.tvInstructions.text = details?.instructions?.joinToString(separator = "\n")
-        binding.tvTags.text = details?.tags?.joinToString(separator = "\n")
+        binding.tvIngredients.text = details?.ingredients?.joinToString(separator = "; ")
+        binding.tvInstructions.text = details?.instructions?.joinToString(separator = "\n - ", prefix = "- ")
+        binding.tvTags.text = details?.tags?.joinToString(separator = ", ")
         Glide.with(this)
             .load(details?.image)
             .transition(DrawableTransitionOptions().crossFade())

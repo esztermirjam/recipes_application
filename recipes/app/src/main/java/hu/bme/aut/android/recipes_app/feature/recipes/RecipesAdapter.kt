@@ -1,6 +1,5 @@
 package hu.bme.aut.android.recipes_app.feature.recipes
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,7 +48,6 @@ class RecipesAdapter(private val listener: OnRecipeSelectedListener) : RecyclerV
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val recipe = recipesList[position]
-                    Log.d("recipe cucc" , recipe?.name.toString())
                     if (recipe != null) {
                         listener.onRecipeSelected(recipe)
                     }
@@ -64,27 +62,12 @@ class RecipesAdapter(private val listener: OnRecipeSelectedListener) : RecyclerV
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
             layoutParams.setMargins(0, 0, 0, 16)
-            Log.d("adapter good","mukodik-e adapter")
             binding.tvName.text = recipe?.name
-            binding.tvIngredients.text = recipe?.ingredients?.joinToString(separator = "\n")
+            binding.tvIngredients.text = recipe?.ingredients?.joinToString(separator = "\n - ", prefix = "- ")
             Glide.with(context)
                 .load(recipe?.image)
                 .transition(DrawableTransitionOptions().crossFade())
                 .into((binding.ivIcon))
-            /*
-            for (recipe in recipeList) {
-                val recipeLayout = LayoutInflater.from(context).inflate(R.layout.item_recipes, null)
-                recipeLayout.findViewById<TextView>(R.id.tvName).text = recipe?.name
-                recipeLayout.findViewById<TextView>(R.id.tvIngredients).text =
-                    recipe?.ingredients?.joinToString(separator = "\n")
-                Glide.with(context)
-                    .load("https://cdn.dummyjson.com/recipe-images/${recipe?.id}.webp")
-                    .transition(DrawableTransitionOptions().crossFade())
-                    .into(recipeLayout.findViewById(R.id.ivIcon))
-                recipeLayout.layoutParams = layoutParams
-                (itemView as ViewGroup).addView(recipeLayout)
-            }
-             */
         }
     }
 }
