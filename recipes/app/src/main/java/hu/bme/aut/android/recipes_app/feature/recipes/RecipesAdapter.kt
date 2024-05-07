@@ -1,5 +1,6 @@
 package hu.bme.aut.android.recipes_app.feature.recipes
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import hu.bme.aut.android.recipes_app.R
+import hu.bme.aut.android.recipes_app.databinding.ItemRecipesBinding
 import hu.bme.aut.android.recipes_app.models.RecipeDetails
 import hu.bme.aut.android.recipes_app.models.RecipeDetailsList
 
@@ -26,7 +28,8 @@ class RecipesAdapter(private val listener: OnRecipeSelectedListener) : RecyclerV
     }
 
     override fun onBindViewHolder(holder: RecipesViewHolder, position: Int) {
-        holder.bind(recipesList)
+        val item = recipesList[position]
+        holder.bind(item)
     }
 
     override fun getItemCount(): Int = recipesList.size
@@ -40,11 +43,13 @@ class RecipesAdapter(private val listener: OnRecipeSelectedListener) : RecyclerV
     }
 
     inner class RecipesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var binding = ItemRecipesBinding.bind(itemView)
         init {
-            itemView.setOnClickListener {
+            binding.root.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val recipe = recipesList[position]
+                    Log.d("recipe cucc" , recipe?.name.toString())
                     if (recipe != null) {
                         listener.onRecipeSelected(recipe)
                     }
@@ -52,13 +57,21 @@ class RecipesAdapter(private val listener: OnRecipeSelectedListener) : RecyclerV
             }
         }
 
-        fun bind(recipeList: MutableList<RecipeDetails?>) {
+        fun bind(recipe: RecipeDetails?) {
             val context = itemView.context
             val layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
             layoutParams.setMargins(0, 0, 0, 16)
+            Log.d("adapter good","mukodik-e adapter")
+            binding.tvName.text = recipe?.name
+            binding.tvIngredients.text = recipe?.ingredients?.joinToString(separator = "\n")
+            Glide.with(context)
+                .load(recipe?.image)
+                .transition(DrawableTransitionOptions().crossFade())
+                .into((binding.ivIcon))
+            /*
             for (recipe in recipeList) {
                 val recipeLayout = LayoutInflater.from(context).inflate(R.layout.item_recipes, null)
                 recipeLayout.findViewById<TextView>(R.id.tvName).text = recipe?.name
@@ -71,6 +84,7 @@ class RecipesAdapter(private val listener: OnRecipeSelectedListener) : RecyclerV
                 recipeLayout.layoutParams = layoutParams
                 (itemView as ViewGroup).addView(recipeLayout)
             }
+             */
         }
     }
 }

@@ -3,4 +3,6 @@
     <string name="recipes">Recipes</string>
     <string name="recipe">recipe</string>
     <string name="details">Recipe details of %s </string>
+    <string name="r_details">Recipe details</string>
+
 </resources>

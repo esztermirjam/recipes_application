@@ -2,6 +2,7 @@ package hu.bme.aut.android.recipes_app.feature.recipes
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import hu.bme.aut.android.recipes_app.databinding.ActivityRecipesBinding
@@ -39,6 +40,7 @@ class RecipesActivity : AppCompatActivity(), RecipesAdapter.OnRecipeSelectedList
                 if (response.isSuccessful) {
                     val recipeDetailsList = response.body()
                     if (recipeDetailsList != null) {
+                        Log.d("activity good","mukodik-e adapter")
                         adapter.setRecipes(recipeDetailsList)
                     }
                 } else {
@@ -54,7 +56,8 @@ class RecipesActivity : AppCompatActivity(), RecipesAdapter.OnRecipeSelectedList
 
     override fun onRecipeSelected(recipe: RecipeDetails) {
         val intent = Intent(this, DetailsActivity::class.java)
-        intent.putExtra(DetailsActivity.EXTRA_RECIPE_NAME, recipe.name)
+        intent.putExtra("STRING_KEY", recipe.name)
+        intent.putExtra("INT_KEY", recipe.id)
         startActivity(intent)
     }
 }

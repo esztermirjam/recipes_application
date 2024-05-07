@@ -47,7 +47,7 @@ class DetailsFragment : Fragment() {
         binding.tvInstructions.text = details?.instructions?.joinToString(separator = "\n")
         binding.tvTags.text = details?.tags?.joinToString(separator = "\n")
         Glide.with(this)
-            .load("https://cdn.dummyjson.com/recipe-images/${details?.id}.webp")
+            .load(details?.image)
             .transition(DrawableTransitionOptions().crossFade())
             .into(binding.ivIcon)
     }

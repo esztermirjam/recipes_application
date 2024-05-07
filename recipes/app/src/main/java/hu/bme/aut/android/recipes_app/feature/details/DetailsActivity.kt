@@ -22,11 +22,11 @@ class DetailsActivity : AppCompatActivity(), DetailsDataHolder{
 
     private lateinit var binding: ActivityDetailsBinding
     private var recipe: String? = null
+    private var rec_id: Int? = null
     private var recipeDetails: RecipeDetails? = null
 
     companion object {
         private const val TAG = "DetailsActivity"
-        const val EXTRA_RECIPE_NAME = "extra.recipe_name"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +34,20 @@ class DetailsActivity : AppCompatActivity(), DetailsDataHolder{
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        recipe = intent.getStringExtra(EXTRA_RECIPE_NAME)
+        recipe = intent.getStringExtra("STRING_KEY")
+        rec_id = intent.getIntExtra("INT_KEY", 1)
+
 
         supportActionBar?.title = getString(R.string.details, recipe)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onResume() {
@@ -47,7 +57,7 @@ class DetailsActivity : AppCompatActivity(), DetailsDataHolder{
 
         TabLayoutMediator(binding.tabLayout, binding.mainViewPager) { tab, position ->
             tab.text = when(position) {
-                0 -> getString(R.string.details)
+                0 -> getString(R.string.r_details)
                 else -> ""
             }
         }.attach()
@@ -55,7 +65,7 @@ class DetailsActivity : AppCompatActivity(), DetailsDataHolder{
     }
 
     private fun loadDetailsData() {
-        NetworkManager.getRecipe(1)?.enqueue(object : Callback<RecipeDetails?> {
+        NetworkManager.getRecipe(rec_id)?.enqueue(object : Callback<RecipeDetails?> {
             override fun onResponse(
                 call: Call<RecipeDetails?>,
                 response: Response<RecipeDetails?>
